@@ -8,8 +8,8 @@ import LayoutWrapper from "@/components/layouts/LayoutWrapper";
 const Page404: NextPage = () => {
   return (
     <>
+      <NextSeo title="404 Not Found" />
       <LayoutWrapper custom>
-        <NextSeo title="404 Not Found" />
         <section className="flex flex-1 justify-center items-center bg-white dark:bg-gray-900">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center">
