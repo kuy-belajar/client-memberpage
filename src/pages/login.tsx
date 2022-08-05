@@ -1,11 +1,32 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
+import { useState, FormEvent } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import LayoutWrapper from "@/components/layouts/LayoutWrapper";
 
+import users from "@/constants/api/users";
+import { setAuthHeader } from "@/configs/axios";
+
+import InputForm from "@/components/form/input";
+
 const Login: NextPage = () => {
+  const [email, setEmail] = useState(() => "");
+  const [password, setPassword] = useState(() => "");
+
+  const submitClick = (event: FormEvent): void => {
+    event.preventDefault();
+    console.log({ email, password });
+    users
+      .login({ email, password })
+      .then((res) => {
+        setAuthHeader(res.data.token);
+        users.details().then((detail) => {});
+      })
+      .catch((error) => {});
+  };
+
   return (
     <>
       <NextSeo title="Login to your account" />
@@ -16,39 +37,21 @@ const Login: NextPage = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="name@company.com"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
+              <form className="space-y-3 md:space-y-4" onSubmit={submitClick}>
+                <InputForm
+                  name={email}
+                  type="email"
+                  placeholder="name@company.com"
+                  onChange={(event) => setEmail(event.target.value)}
+                  labelName="Email"
+                />
+                <InputForm
+                  name={password}
+                  type="password"
+                  placeholder="••••••••••"
+                  onChange={(event) => setPassword(event.target.value)}
+                  labelName="Password"
+                />
                 {/* <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">

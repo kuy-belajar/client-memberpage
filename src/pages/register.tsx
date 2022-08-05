@@ -1,11 +1,26 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
+import { useState } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import LayoutWrapper from "@/components/layouts/LayoutWrapper";
 
+import InputForm from "@/components/form/input";
+import SelectForm from "@/components/form/select";
+
 const Register: NextPage = () => {
+  const [name, setName] = useState(() => "");
+  const [email, setEmail] = useState(() => "");
+  const [password, setPassword] = useState(() => "");
+  const [profession, setProfession] = useState(() => "");
+
+  console.log({
+    name,
+    email,
+    password,
+    profession,
+  });
   return (
     <>
       <NextSeo title="Create an account" />
@@ -16,55 +31,43 @@ const Register: NextPage = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="name@company.com"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="confirm-password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Confirm password
-                  </label>
-                  <input
-                    type="confirm-password"
-                    name="confirm-password"
-                    id="confirm-password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
+              <form className="space-y-3 md:space-y-4" action="#">
+                <InputForm
+                  name={name}
+                  type="text"
+                  placeholder="Your name"
+                  onChange={(event) => setName(event.target.value)}
+                  labelName="Full Name"
+                />
+                <InputForm
+                  name={email}
+                  type="email"
+                  placeholder="name@company.com"
+                  onChange={(event) => setEmail(event.target.value)}
+                  labelName="Email"
+                />
+                <InputForm
+                  name={password}
+                  type="email"
+                  placeholder="••••••••••"
+                  onChange={(event) => setPassword(event.target.value)}
+                  labelName="Password"
+                />
+                <SelectForm
+                  name="profession"
+                  labelName="Role"
+                  placeholder="Select occupation"
+                  value={profession}
+                  onClick={setProfession}
+                >
+                  <option value="">Select role</option>
+                  <option value="Frontend Developer">Frontend Developer</option>
+                  <option value="Backend Developer">Backend Developer</option>
+                  <option value="Fullstack Developer">
+                    Fullstack Developer
+                  </option>
+                  <option value="Fullstack Engineer">Fullstack Engineer</option>
+                </SelectForm>
                 {/* <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
