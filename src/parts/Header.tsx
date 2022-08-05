@@ -2,20 +2,26 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import clsx from "clsx";
 
 const Header: NextPage = () => {
+  const router = useRouter();
+  const currentRoute = router.pathname;
+  const frontUrl: string = process.env.CLIENT_FRONTPAGE_URL || "";
+
   return (
     <>
       <header>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 py-6 dark:bg-gray-800">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <Link href="/" passHref>
+            <Link href={`${frontUrl}`} passHref>
               <a className="flex items-center">
                 <img
                   src="https://flowbite.com/docs/images/logo.svg"
                   className="mr-3 h-6 sm:h-9"
-                  alt="Flowbite Logo"
+                  alt="Sainseni Logo"
                 />
                 <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
@@ -23,7 +29,7 @@ const Header: NextPage = () => {
               </a>
             </Link>
             <div className="flex items-center lg:order-2">
-              <Link href="/register" passHref>
+              <Link href="/login" passHref>
                 <a className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                   Login
                 </a>
@@ -68,9 +74,14 @@ const Header: NextPage = () => {
             >
               <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <li>
-                  <Link href="/" passHref>
+                  <Link href={`${frontUrl}`} passHref>
                     <a
-                      className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                      className={clsx("block py-2 pr-4 pl-3 rounded", {
+                        ["text-white bg-primary-700  lg:text-primary-700 lg:p-0 dark:text-white lg:bg-transparent"]:
+                          currentRoute === "/",
+                        ["text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"]:
+                          currentRoute !== "/",
+                      })}
                       aria-current="page"
                     >
                       Home
@@ -78,22 +89,43 @@ const Header: NextPage = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing" passHref>
-                    <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  <Link href={`${frontUrl}/pricing`} passHref>
+                    <a
+                      className={clsx("block py-2 pr-4 pl-3 rounded", {
+                        ["text-white bg-primary-700  lg:text-primary-700 lg:p-0 dark:text-white lg:bg-transparent"]:
+                          currentRoute === "/pricing",
+                        ["text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"]:
+                          currentRoute !== "/pricing",
+                      })}
+                    >
                       Pricing
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/features" passHref>
-                    <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  <Link href={`${frontUrl}/features`} passHref>
+                    <a
+                      className={clsx("block py-2 pr-4 pl-3 rounded", {
+                        ["text-white bg-primary-700  lg:text-primary-700 lg:p-0 dark:text-white lg:bg-transparent"]:
+                          currentRoute === "/features",
+                        ["text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"]:
+                          currentRoute !== "/features",
+                      })}
+                    >
                       Features
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/story" passHref>
-                    <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  <Link href={`${frontUrl}/story`} passHref>
+                    <a
+                      className={clsx("block py-2 pr-4 pl-3 rounded", {
+                        ["text-white bg-primary-700  lg:text-primary-700 lg:p-0 dark:text-white lg:bg-transparent"]:
+                          currentRoute === "/story",
+                        ["text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"]:
+                          currentRoute !== "/story",
+                      })}
+                    >
                       Story
                     </a>
                   </Link>

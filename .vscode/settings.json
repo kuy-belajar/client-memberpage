@@ -8,5 +8,6 @@
     "source.addMissingImports": true,
     "source.fixAll.eslint": true,
     "source.fixAll.format": true
-  }
+  },
+  "cSpell.words": ["Flowbite", "FRONTPAGE", "Sainseni"]
 }
