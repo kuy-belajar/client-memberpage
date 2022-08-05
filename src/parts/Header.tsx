@@ -19,12 +19,12 @@ const Header: NextPage = () => {
             <Link href={`${frontUrl}`} passHref>
               <a className="flex items-center">
                 <img
-                  src="https://flowbite.com/docs/images/logo.svg"
+                  src="images/brand.png"
                   className="mr-3 h-6 sm:h-9"
                   alt="Sainseni Logo"
                 />
-                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-                  Flowbite
+                <span className="self-center text-xl font-bold whitespace-nowrap dark:text-white">
+                  KuyBelajar
                 </span>
               </a>
             </Link>
